@@ -1,18 +1,13 @@
-import styles from './RightSection.module.scss'
+import styles from './RightSection.module.scss';
+import ButtonSection from './ButtonsSections';
 const RightSection = () => {
 
 
 
     return (
         <div className={styles.righSection}>
-
             <form>
-                <input type="text" />
-
-                <div className="buttonWrapper">
-                    <button type="submit"> Go Back</button>
-                    <button type="button"> Next </button>
-                </div>
+                <ButtonSection/>
             </form>
         </div>
     )

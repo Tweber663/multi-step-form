@@ -21,8 +21,12 @@ p {
     box-sizing: border-box;
     position: absolute;
     display: flex;
-    height: 80vh;
-    width: 60vw;
+    max-height: 520px;
+    min-height: 100px;
+    height: 100%;
+    max-width: 800px;
+    min-width: 200px;
+    width: 100%;
     margin: 0;
     left: 50%; 
     top: 50%;

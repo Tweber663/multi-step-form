@@ -1,0 +1,39 @@
+@import '../styles/variables';
+
+.buttonSection button {
+    width: 95px;
+    height: 35px;
+    border-radius: 4px; 
+    font-size: 12px;
+    border: none;
+    font-family: "Ubuntu", sans-serif;
+}
+
+.buttonSection  {
+    width: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    bottom: 0;
+}
+
+.btnNext {
+    background-color: $marine-blue;
+    color: white;
+    transition: background-color 200ms ease;
+}
+
+.btnNext:hover {
+    background-color: $Purplish-blue;
+}
+
+.btnBack {
+    background-color: white;
+    color: $Cool-gray;
+    font-weight: 500;
+    transition: background-color 200ms ease
+}
+
+.btnBack:hover {
+    color: $marine-blue;
+}
