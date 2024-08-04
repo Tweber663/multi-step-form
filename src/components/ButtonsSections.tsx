@@ -1,22 +1,30 @@
 import styles from './ButtonSections.module.scss'
-import { FormEvent } from 'react';
+import { FormEvent, FC } from 'react';
 
-const ButtonSection = () => {
+interface btnInterface {
+    buttonFunction: (e: FormEvent<HTMLButtonElement>) => void;
+    verification: () => void; 
+}
+
+const ButtonSection:FC<btnInterface> = ({buttonFunction, verification}) => {
 
     const buttonHandler = (e: FormEvent<HTMLButtonElement>) => {
-        console.log(e);
+        buttonFunction(e);
+        verification(); 
     }
 
     return (
         <div className={styles.buttonSection}>
             <button 
                 onClick={(e) => buttonHandler(e)}
+                value="back"
                 type="button" 
                 className={styles.btnBack}> 
                 Go Back
             </button>
             <button 
                 onClick={(e) => buttonHandler(e)} 
+                value="next"
                 type="button" 
                 className={styles.btnNext}> 
                 Next Step 

@@ -6,7 +6,6 @@ import RightSection from "./RightSection";
 const Layout = () => {
 
     const state  = useAppSelector(state => state); 
-    console.log(state)
     return (
         <div className={styles.layout}>
             <LeftSection/>
