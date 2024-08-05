@@ -1,18 +1,23 @@
 @import '../styles/variables';
 
-.formStep1 p {
+.formStep2 {
+    display: none;
+}
+
+.formStep2.nextPage {
+    display: block;
+    background-color: red;
+}
+
+.formStep2 p {
     font-size: 14px;
     margin-bottom: 20px;
     color: $Cool-gray;
 }
 
-.formStep1 h1 {
+.formStep2 h1 {
     color: $marine-blue;
     margin-top: 15px
-}
-
-.formStep1.hide {
-    display: none;
 }
 
 label {

@@ -1,39 +1,33 @@
 import styles from './RightSection.module.scss';
 import ButtonSection from './ButtonsSections';
-import { FormEvent, useState, useRef, useCallback } from 'react';
-import { useAppDispatch } from '../store/store';
-import { counting } from '../store/features/counterSlice';
+import { useEffect, useState, useRef } from 'react';
 import FormStep1 from './FormStep1';
-import { formRefrenceType } from './FormStep1';
+import FormStep2 from './FormStep2';
+import { Checking } from './FormStep1';
+
+export type confirmInter = {
+    form1?: boolean;
+    form2?: boolean; 
+}
 
 const RightSection = () => {
-    const dispatch = useAppDispatch(); 
-    const [count, setCount] = useState<number>(1); 
-    const [formVerified, setFormVerified] = useState(false);
-    dispatch(counting(count)); 
+    const [refresh, setRefresh] = useState(false);
+    
 
-    const form1RefTrigger = useRef<formRefrenceType>(null);
-
-    // Use useCallback to memoize the verification logic
-    const verificationLogic = useCallback((confirm?: string) => {
-        console.log(confirm);
-        form1RefTrigger.current?.verify(); 
-    }, []);
-
-    const buttonLogic = (e: FormEvent<HTMLButtonElement>): void => {
-        const target = e.target as HTMLButtonElement; 
-        if (target.value === 'next' && count < 4 ) {
-            setCount(prev => prev + 1);
-        } else if (target.value === 'back' && count > 1) {
-            setCount(prev => prev - 1);
-        }
+    const refFormOne = useRef<Checking>(null); 
+    const connection = (e: boolean = false) => {
+       if (e === true && refFormOne.current) {
+        refFormOne.current.triggerFunction(); 
+       }
     }
+
 
     return (
         <div className={styles.righSection}>
             <form>
-                <FormStep1 verification={verificationLogic} ref={form1RefTrigger}/>
-                <ButtonSection verification={verificationLogic} buttonFunction={buttonLogic}/>
+                <FormStep1 ref={refFormOne}/>
+                {/* <FormStep2/> */}
+                <ButtonSection parentTrigger={connection} />
             </form>
         </div>
     )

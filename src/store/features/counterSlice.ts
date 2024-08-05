@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 // The state is a number, so no need for an interface here.
 type CounterState = number;
 
-const initialState: CounterState = 1; 
+let initialState: CounterState = 1; 
 
 export const CounterSlice = createSlice({
     name: "Counter",
