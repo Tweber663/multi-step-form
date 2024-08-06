@@ -14,9 +14,10 @@ export interface Checking {
 
 interface propsCheck {
     returnFunc: (e: boolean, b: number) => void; 
+    pageOn: boolean;
 }
 
-const FormStep1 = forwardRef<Checking, propsCheck>(({returnFunc}, ref) => {
+const FormStep1 = forwardRef<Checking, propsCheck>(({returnFunc, pageOn}, ref) => {
     const dispatch = useAppDispatch();
     const [name, setName] = useState(''); 
     const [email, setEmail] = useState(''); 
@@ -56,8 +57,10 @@ const FormStep1 = forwardRef<Checking, propsCheck>(({returnFunc}, ref) => {
         changePage,
     }));
 
+    console.log(pageOn)
+
     return (
-        <div className={clsx(styles.formStep1, pageSwapNext && styles.hide)}>
+        <div className={clsx(styles.formStep1, pageOn && styles.show)}>
             <h1>Personal info</h1>
             <p>Please provide your name, email address and phone number</p>
             

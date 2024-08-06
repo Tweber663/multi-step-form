@@ -11,8 +11,12 @@
     margin-top: 15px
 }
 
-.formStep1.hide {
+.formStep1 {
     display: none;
+}
+
+.formStep1.show {
+    display: block;
 }
 
 label {

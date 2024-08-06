@@ -1,13 +1,14 @@
 @import '../styles/variables';
 
 .formStep2 {
-    
+    background-color: rgb(0, 204, 255);
+    display: none;
 }
 
-.formStep2.nextPage {
+.formStep2.show {
     display: block;
-    background-color: red;
 }
+
 
 .formStep2 p {
     font-size: 14px;

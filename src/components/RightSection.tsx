@@ -5,7 +5,7 @@ import FormStep1 from './FormStep1';
 import FormStep2 from './FormStep2';
 import { Checking } from './FormStep1';
 import { refChecking } from './ButtonsSections';
-import { compileString } from 'sass';
+import { useAppSelector } from '../store/store';
 
 export type confirmInter = {
     form1?: boolean;
@@ -14,18 +14,31 @@ export type confirmInter = {
 
 const RightSection = () => {
     const [refresh, setRefresh] = useState(false);
-    
-
-    const refForm = useRef<Checking>(null); 
+    const currentState = useAppSelector(state => state)
+    const refForm1 = useRef<Checking>(null); 
+    const refForm2 = useRef<Checking>(null); 
     const refButtonSection = useRef<refChecking>(null)
+    const [pageOn1, setPageOn1] = useState(false); 
+    const [pageOn2, setPageOn2] = useState(false); 
+    const [pageOn3, setPageOn3] = useState(false); 
+    const [pageOn4, setPageOn4] = useState(false); 
+
+
+    useEffect(() => {
+        currentState.counterReducer === 1?  setPageOn1(true) : setPageOn1(false) 
+        currentState.counterReducer === 2?  setPageOn2(true) : setPageOn2(false) 
+
+    }, [currentState.counterReducer])
 
     const connection = (e: boolean = false, counter: number) => {
-       if (e === true && refForm.current && counter === 1) {
-        refForm.current.triggerFunction(); 
+        console.log('hey I got tirggerd')
+
+       if (e === true && refForm1.current && counter === 1) {
+        refForm1.current.triggerFunction(); 
        }
 
-       if (e === true && refForm.current && counter === 2) {
-        refForm.current.triggerFunction(); 
+       if (e === true && refForm2.current && counter === 2) {
+        refForm2.current.triggerFunction(); 
        }
 
     }
@@ -41,16 +54,12 @@ const RightSection = () => {
     }
 
 
-    const switchingForms = (form: boolean = false, counter: number) => {
-        refForm.current!.changePage(form);
-    }
-
     return (
         <div className={styles.righSection}>
             <form>
-                <FormStep1  returnFunc={retrunFromOne} ref={refForm}/>
-                {/* <FormStep2 /> */}
-                <ButtonSection switchForm1={switchingForms} ref={refButtonSection} parentTrigger={connection} />
+                <FormStep1 pageOn={pageOn1}  returnFunc={retrunFromOne} ref={refForm1}/>
+                <FormStep2 pageOn={pageOn2} returnFunc={retrunFromOne} ref={refForm2}/> 
+                <ButtonSection ref={refButtonSection} parentTrigger={connection} />
             </form>
         </div>
     )

@@ -1,8 +1,8 @@
-import styles from './FormStep1.module.scss';
+import styles from './FormStep2.module.scss';
 import { useState} from 'react';
 import { forwardRef } from 'react';
 import { useImperativeHandle } from 'react';
-import { useAppDispatch, useAppSelector } from '../store/store';
+import { useAppDispatch} from '../store/store';
 import { checkingSteps } from '../store/features/formVerifySlice';
 import clsx from 'clsx';
 
@@ -13,10 +13,11 @@ export interface Checking {
 }
 
 interface propsCheck {
-    returnFunc: (e: boolean) => void; 
+    returnFunc: (e: boolean, b: number) => void; 
+    pageOn: boolean
 }
 
-const FormStep1 = forwardRef<Checking, propsCheck>(({returnFunc}, ref) => {
+const FormStep2 = forwardRef<Checking, propsCheck>(({returnFunc, pageOn}, ref) => {
     const dispatch = useAppDispatch();
     const [name, setName] = useState(''); 
     const [email, setEmail] = useState(''); 
@@ -26,6 +27,8 @@ const FormStep1 = forwardRef<Checking, propsCheck>(({returnFunc}, ref) => {
     const [errOn3, setErrOn3] = useState(false); 
     const [pageSwapNext, setPageSwapNext] = useState(false); 
 
+
+
     const triggerFunction = () => {
         if (!name && !email && !number) {
             console.log('ERROR: All needs filled in')
@@ -33,30 +36,30 @@ const FormStep1 = forwardRef<Checking, propsCheck>(({returnFunc}, ref) => {
             setErrOn2(true); 
             setErrOn3(true); 
             dispatch(checkingSteps({step1: false}))
-            returnFunc(false); 
+            returnFunc(false, 2); 
         } else {
             dispatch(checkingSteps({step1: true}))
-            returnFunc(true); 
+            returnFunc(true, 2); 
+            setErrOn1(false); 
+            setErrOn2(false); 
+            setErrOn3(false); 
         }
     }
 
 
     const changePage = (e: boolean = false) => {
         console.log('changePage function has been triggered:', e); 
-        setPageSwapNext((prev) => {
-            console.log('Previous state:', prev);
-            console.log('New state:', e);
-            return e;
-        });
+        setPageSwapNext(e)
     }
-
+    
     useImperativeHandle(ref, () => ({
         triggerFunction,
         changePage,
     }));
 
+    console.log(pageOn)
     return (
-        <div className={clsx(styles.formStep1, pageSwapNext && styles.hide)}>
+        <div className={clsx(styles.formStep2, pageOn && styles.show)}>
             <h1>Personal info</h1>
             <p>Please provide your name, email address and phone number</p>
             
@@ -81,4 +84,4 @@ const FormStep1 = forwardRef<Checking, propsCheck>(({returnFunc}, ref) => {
     )
 })
 
-export default FormStep1;
+export default FormStep2;

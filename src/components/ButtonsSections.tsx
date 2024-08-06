@@ -8,14 +8,14 @@ import { useImperativeHandle } from 'react';
 
 type Checking = {
     parentTrigger: (e: boolean, b: number) => void; 
-    switchForm1: (e: boolean, counter: number) => void;
+    // switchForm1: (e: boolean, counter: number) => void;
 }
 
 export interface refChecking {
     returnVeirfyRequest: (e: boolean, formNumber: number) => void
 }
 
-const ButtonSection = forwardRef<refChecking, Checking>(({parentTrigger, switchForm1}, ref) => {
+const ButtonSection = forwardRef<refChecking, Checking>(({parentTrigger}, ref) => {
     
     let currentState = useAppSelector(state => state); 
     const dispatch = useAppDispatch()
@@ -54,7 +54,6 @@ const ButtonSection = forwardRef<refChecking, Checking>(({parentTrigger, switchF
             setCounter(prev => {
                 let count = prev; 
                 if (prev < 4) count = prev + 1
-                switchForm1(true, counter); //Switches Form1 Off
                 return count; 
             })
         }
@@ -65,8 +64,6 @@ const ButtonSection = forwardRef<refChecking, Checking>(({parentTrigger, switchF
         setCounter(prev => {
             let count = prev;
             if (prev > 1)  count = prev - 1;
-            switchForm1(false, counter)//Switches Form1 On
-    
             return count;
         });
     }
