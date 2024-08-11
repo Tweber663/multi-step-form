@@ -5,11 +5,11 @@ import { useImperativeHandle } from 'react';
 import { useAppDispatch} from '../store/store';
 import { checkingSteps } from '../store/features/formVerifySlice';
 import clsx from 'clsx';
+import Form from 'react-bootstrap/Form';
 
 // Define the props interface
 export interface Checking {
     triggerFunction: () => void; 
-    changePage: (e: boolean) => void; 
 }
 
 interface propsCheck {
@@ -19,68 +19,67 @@ interface propsCheck {
 
 const FormStep2 = forwardRef<Checking, propsCheck>(({returnFunc, pageOn}, ref) => {
     const dispatch = useAppDispatch();
-    const [name, setName] = useState(''); 
-    const [email, setEmail] = useState(''); 
-    const [number, setNumber] = useState(''); 
-    const [errOn1, setErrOn1] = useState(false); 
-    const [errOn2, setErrOn2] = useState(false); 
-    const [errOn3, setErrOn3] = useState(false); 
-    const [pageSwapNext, setPageSwapNext] = useState(false); 
+    const [isChecked1, setIsChecked1] = useState(false);
+    const [isChecked2, setIsChecked2] = useState(false);
+    const [isChecked3, setIsChecked3] = useState(false);
+    const checkArr: boolean[] = [isChecked1, isChecked2, isChecked3];
 
 
+    const checkboxHandler1 = () => {
+        setIsChecked1(prev => !prev); 
+        setIsChecked2(false);
+        setIsChecked3(false);
+
+    } 
+    const checkboxHandler2 = () => {
+        setIsChecked2(prev => !prev); 
+        setIsChecked3(false);
+        setIsChecked1(false);
+    } 
+    const checkboxHandler3 = () => {
+        setIsChecked3(prev => !prev); 
+        setIsChecked2(false);
+        setIsChecked1(false);
+    } 
 
     const triggerFunction = () => {
-        if (!name && !email && !number) {
-            console.log('ERROR: All needs filled in')
-            setErrOn1(true); 
-            setErrOn2(true); 
-            setErrOn3(true); 
-            dispatch(checkingSteps({step1: false}))
-            returnFunc(false, 2); 
-        } else {
-            dispatch(checkingSteps({step1: true}))
-            returnFunc(true, 2); 
-            setErrOn1(false); 
-            setErrOn2(false); 
-            setErrOn3(false); 
-        }
+       
+        return false; 
     }
 
-
-    const changePage = (e: boolean = false) => {
-        console.log('changePage function has been triggered:', e); 
-        setPageSwapNext(e)
+    const boxCheckHandler = () => {
+       
     }
+
     
     useImperativeHandle(ref, () => ({
         triggerFunction,
-        changePage,
     }));
 
     console.log(pageOn)
     return (
         <div className={clsx(styles.formStep2, pageOn && styles.show)}>
-            <h1>Personal info</h1>
-            <p>Please provide your name, email address and phone number</p>
-            
-            <div className={styles.labelWrapper}>
-                <label>Name</label>
-                <label className={clsx(styles.errMsg, errOn1 && styles.errMsgVisible)}>This field is required</label>
+              <h1>Select your plan</h1>
+              <p>You have the option of monthly or yearly billing.</p>
+            <div onClick={boxCheckHandler} className={styles.checkBoxWrapper}>
+                <div onClick={checkboxHandler1} className={clsx(styles.box, isChecked1 && styles.arcadeChecked)}>
+                    <input type="checkbox" checked={isChecked1} name="arcade" id=""/>
+                </div>
+                <div onClick={checkboxHandler2} className={clsx(styles.box, isChecked2 && styles.advancedChecked)}>
+                    <input type="checkbox" checked={isChecked2} name="advanced" id=""/>
+                </div>
+                <div onClick={checkboxHandler3} className={clsx(styles.box, isChecked3 && styles.proChecked)}>
+                    <input type="checkbox" checked={isChecked3} name="pro" id=""/>
+                </div>
             </div>
-            <input onChange={((e) => setName(e.target.value))} placeholder="e.g Agent Smith" type="text" name="" id="" />
-          
-            <div className={styles.labelWrapper}>
-                <label>Email Address</label>
-                <label className={clsx(styles.errMsg, errOn2 && styles.errMsgVisible)}>This field is required</label>
+            <div className="form-check form-switch">
+            <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault"/>
             </div>
-            <input onChange={((e) => setEmail(e.target.value))} placeholder='e.g hello@hotmail.com' type="text" name="" id="" />
+
            
-            <div className={styles.labelWrapper}>
-                <label>Phone Number</label>
-                <label className={clsx(styles.errMsg, errOn3 && styles.errMsgVisible)}>This field is required</label>
-            </div>
-            <input onChange={((e) => setNumber(e.target.value))} placeholder='e.g +44 4567872465' type="text" name="" id="" />
+           
         </div>
+        
     )
 })
 

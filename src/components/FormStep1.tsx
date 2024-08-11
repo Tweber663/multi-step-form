@@ -29,14 +29,21 @@ const FormStep1 = forwardRef<Checking, propsCheck>(({returnFunc, pageOn}, ref) =
 
 
 
-    const triggerFunction = () => {
-        if (!name && !email && !number) {
-            console.log('ERROR: All needs filled in')
-            setErrOn1(true); 
-            setErrOn2(true); 
-            setErrOn3(true); 
-            dispatch(checkingSteps({step1: false}))
+    const triggerFunction = () => {        //First loop checks if "ANY" inptus are empty
+        if (!name || !email || !number) {
+            //Checks if all inputs are empty. 
+            if (!name && !email && !number) {
+                console.log('ERROR: All needs filled in')
+                setErrOn1(true); 
+                setErrOn2(true); 
+                setErrOn3(true); 
+            } 
+            !name ? setErrOn1(true) : setErrOn1(false); 
+            !email? setErrOn2(true) : setErrOn2(false); 
+            !number? setErrOn3(true) : setErrOn3(false);
+
             returnFunc(false, 1); 
+            dispatch(checkingSteps({step1: false}))
         } else {
             dispatch(checkingSteps({step1: true}))
             returnFunc(true, 1); 
