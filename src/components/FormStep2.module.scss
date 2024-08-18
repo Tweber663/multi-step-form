@@ -8,7 +8,6 @@
     display: block;
 }
 
-
 .formStep2 p {
     font-size: 14px;
     margin-bottom: 20px;
@@ -25,26 +24,27 @@
     justify-content: space-between;
 }
 
-input[type=checkbox] {
-    position: relative;
-    // height: 1px;
-    // width: 1px;
-    background-color: #ff0000;
-    border-radius: 4px;
-    display: inline-block;
-    margin-right: 10px;
-}
-
 .box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
     border: 1px solid $Light-gray;
     height: 140px;
     width: 120px;
     border-radius: 9px;
     transition: 250ms ease border-color; 
+    padding: 15px;
+    margin: 0;
+    box-sizing: border-box;
 }
 
 .box:hover {
     border-color: $Purplish-blue
+}
+
+input[name=arcade], input[name=advanced], input[name=pro] {
+    opacity: 0;
 }
 
 .arcadeChecked,.advancedChecked,.proChecked {
@@ -63,18 +63,82 @@ input[type=checkbox] {
     border-color: $Purplish-blue
 }
 
-
-.labelWrapper {
-    display: flex;
-    justify-content: space-between;
+.iconImg {
+    position: absolute;
+    width: 35px;
+    height: 35px;
 }
 
-.errMsg {
-    display: none;
-}
-
-.errMsgVisible {
-    display: block;
-    color: red;
+.boxTitleWrapper h4 {
+    color: $marine-blue;
     font-weight: 500;
 }
+
+.radioWrapper {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    border-radius: 9px;
+    background-color: $Alabaster;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+    margin: 0;
+  }
+
+.switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: $marine-blue;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+  
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 14px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    -webkit-transition: .3s;
+    transition: .3s;
+}
+  
+input[name=switch]:checked + .slider {
+    background-color: $marine-blue;
+}
+
+  
+input[name=switch]:checked + .slider:before {
+    transform: translateX(18px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+  
+.slider.round:before {
+    border-radius: 50%;
+}
+
+
+
+

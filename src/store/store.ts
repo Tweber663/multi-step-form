@@ -4,12 +4,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { TypedUseSelectorHook } from "react-redux";
 import counterSlice from "./features/counterSlice";
 import formVerifySlice from "./features/formVerifySlice";
+import monthlyYearlySlicer from "./features/monthlyYearlySlicer";
+import totalPriceSlicer from "./features/totalPriceSlicer";
 
 export const store = configureStore({
-    reducer: {
+    reducer: { 
         formRedcuer: formSlice, 
         counterReducer: counterSlice, 
         verifyRedcuer: formVerifySlice,
+        monthlyYearly: monthlyYearlySlicer,
+        totalCost: totalPriceSlicer, 
     }
 })
 

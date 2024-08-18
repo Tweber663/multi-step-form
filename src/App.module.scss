@@ -1,6 +1,7 @@
 @import './styles/variables';
 
 body {
+    font-family: "Ubuntu", sans-serif;
     border: 1px solid blue;
     box-sizing: border-box;
     overflow: hidden;
@@ -9,7 +10,6 @@ body {
     margin: 0;
     padding: 0;
     position: relative;
-    font-family: "Ubuntu", sans-serif;
     background-color: $Light-blue;
 }
 

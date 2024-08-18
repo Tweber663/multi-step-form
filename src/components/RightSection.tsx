@@ -7,7 +7,7 @@ import { Checking } from './FormStep1';
 import { refChecking } from './ButtonsSections';
 import { useAppSelector } from '../store/store';
 import Form from 'react-bootstrap/Form';
-import { Button } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
 
 export type confirmInter = {
     form1?: boolean;
@@ -58,7 +58,6 @@ const RightSection = () => {
 
     return (
         <div className={styles.righSection}>
-                <Button variant="outline-primary">Primary</Button>{' '}
             <form>
                 <FormStep1 pageOn={pageOn1}  returnFunc={retrunFromOne} ref={refForm1}/>
                 <FormStep2 pageOn={pageOn2} returnFunc={retrunFromOne} ref={refForm2}/>

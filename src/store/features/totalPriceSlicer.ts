@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction } from "@reduxjs/toolkit";
 
 type Check = number; 
 
@@ -8,8 +9,8 @@ export const TotalPrice = createSlice({
     name: 'totalPrice', 
     initialState, 
     reducers: {
-        addCost: (state, payload) => {
-            
+        addCost: (state, action: PayloadAction<number>) => {
+            return action.payload
         }
     }
 })
