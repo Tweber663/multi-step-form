@@ -2,35 +2,55 @@ import { createSlice } from "@reduxjs/toolkit"
 import { PayloadAction } from "@reduxjs/toolkit"
 
 interface Checking {
-    addOn1: boolean, 
-    addOn2: boolean, 
-    addOn3: boolean,
-}
-
-type CheckPayload = {
-    addOn1?: boolean, 
-    addOn2?: boolean, 
-    addOn3?: boolean, 
+    addOn1?: {
+        active: boolean, 
+        cost: number, 
+    }, 
+    addOn2?: {
+        active: boolean, 
+        cost: number, 
+    }, 
+    addOn3?: {
+        active: boolean, 
+        cost: number
+    },
 }
 
 const initialState: Checking = {
-    addOn1: false, 
-    addOn2: false, 
-    addOn3: false, 
+    addOn1: {
+        active: false, 
+        cost: 0, 
+    },
+    addOn2: {
+        active: false, 
+        cost: 0, 
+    }, 
+    addOn3: {
+        active: false, 
+        cost: 0, 
+    } 
 }
 
-type CheckAddOn = string
 
 
 const AddOnSLicer = createSlice({
     name: 'AddOn', 
     initialState, 
     reducers: {
-        currentAddOns: (state, action: PayloadAction<CheckPayload>) => {
+        currentAddOns: (state, action: PayloadAction<Checking>) => {
             return {
-                addOn1: action.payload.addOn1 ?? state.addOn1,
-                addOn2: action.payload.addOn2 ?? state.addOn2,
-                addOn3: action.payload.addOn3 ?? state.addOn3,
+                addOn1: {
+                  active: action.payload.addOn1?.active ?? state.addOn1!.active,
+                  cost: action.payload.addOn1?.cost ?? state.addOn1!.cost
+                },
+                addOn2: {
+                    active: action.payload.addOn2?.active ?? state.addOn2!.active, 
+                    cost: action.payload.addOn2?.cost ?? state.addOn2!.cost, 
+                },
+                addOn3: {
+                    active: action.payload.addOn3?.active ?? state.addOn3!.active, 
+                    cost: action.payload.addOn3?.cost ?? state.addOn3!.cost, 
+                }
             }
         }
     }

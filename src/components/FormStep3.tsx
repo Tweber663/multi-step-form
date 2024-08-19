@@ -3,6 +3,7 @@ import { forwardRef, useEffect, useImperativeHandle, useState } from "react"
 import { checkingSteps } from "../store/features/formVerifySlice";
 import { useAppDispatch, useAppSelector } from "../store/store";
 import { currentAddOns } from "../store/features/addOnsSlicer";
+import { addCost } from "../store/features/totalPriceSlicer";
 import styles from './FormStep3.module.scss';
 import clsx from "clsx";
 
@@ -32,12 +33,11 @@ const FormStep3 = forwardRef<RefCheck, PropsCheck>(({pageOn, returnFunc}, ref) =
     }))
 
     useEffect(() => {
-       addOnOne === true?  dispatch(currentAddOns({addOn1: true})) : dispatch(currentAddOns({addOn1: false})); 
-       addOnTwo === true?  dispatch(currentAddOns({addOn2: true})) : dispatch(currentAddOns({addOn2: false})); 
-       addOnThree === true?  dispatch(currentAddOns({addOn3: true})) : dispatch(currentAddOns({addOn3: false})); 
-    }, [addOnOne, addOnTwo, addOnThree])
+      addOnOne? dispatch(currentAddOns({addOn1: {active: true, cost: currentState.monthlyYearly === 'monthly'? 1 : 10}})) : dispatch(currentAddOns({addOn1: {active: false, cost: 0}}))
+      addOnTwo? dispatch(currentAddOns({addOn2: {active: true, cost: currentState.monthlyYearly === 'monthly'? 2 : 20}})) : dispatch(currentAddOns({addOn2: {active: false, cost: 0}}))
+      addOnThree? dispatch(currentAddOns({addOn3: {active: true, cost: currentState.monthlyYearly === 'monthly'? 2 : 20}})) : dispatch(currentAddOns({addOn3: {active: false, cost: 0}}))
+    }, [addOnOne, addOnTwo, addOnThree, currentState.monthlyYearly])
 
-    console.log(currentState);
 
     return (
         <div className={clsx(styles.formStep3, pageOn && styles.show)}>
@@ -54,7 +54,7 @@ const FormStep3 = forwardRef<RefCheck, PropsCheck>(({pageOn, returnFunc}, ref) =
                 </div>
                 <div className={styles.textWrapper}>
                     <h4>Online service</h4>
-                    <h6>Access to multiplayer games</h6>
+                    <h5>Access to multiplayer games</h5>
                 </div>
                 <div className={styles.priceWrapper}>
                     {currentState.monthlyYearly === 'monthly'? 
@@ -71,7 +71,7 @@ const FormStep3 = forwardRef<RefCheck, PropsCheck>(({pageOn, returnFunc}, ref) =
                 </div>
                 <div className={styles.textWrapper}>
                     <h4>Larger storage</h4>
-                    <h6>Extra 1TB of cloud save</h6>
+                    <h5>Extra 1TB of cloud save</h5>
                 </div>
                 <div className={styles.priceWrapper}>
                     {currentState.monthlyYearly === 'monthly'? 
@@ -87,8 +87,8 @@ const FormStep3 = forwardRef<RefCheck, PropsCheck>(({pageOn, returnFunc}, ref) =
                     <input checked={addOnThree} type="checkbox"/>
                 </div>
                 <div className={styles.textWrapper}>
-                    <h4>Online service</h4>
-                    <h6>Access to multiplayer games</h6>
+                    <h4>Customizable profile</h4>
+                    <h5>Custom theme on your profile</h5>
                 </div>
                 <div className={styles.priceWrapper}>
                     {currentState.monthlyYearly === 'monthly'? 
