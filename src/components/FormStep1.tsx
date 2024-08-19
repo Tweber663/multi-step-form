@@ -64,8 +64,6 @@ const FormStep1 = forwardRef<Checking, propsCheck>(({returnFunc, pageOn}, ref) =
         changePage,
     }));
 
-    console.log(pageOn)
-
     return (
         <div className={clsx(styles.formStep1, pageOn && styles.show)}>
             <h1>Personal info</h1>

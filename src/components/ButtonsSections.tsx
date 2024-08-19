@@ -37,6 +37,11 @@ const ButtonSection = forwardRef<refChecking, Checking>(({parentTrigger}, ref) =
             console.log('request have been sentto from 2')
             parentTrigger(true, counter); 
         }
+
+        if (counter === 3) {
+            console.log('request have been sentto from 3')
+            parentTrigger(true, counter); 
+        }
     }
 
     //2. Retunrs back confirmation from requested form
@@ -48,7 +53,7 @@ const ButtonSection = forwardRef<refChecking, Checking>(({parentTrigger}, ref) =
         if (e === false) formVerified = false; 
     }
 
-    //3.If the verify retunrs true, it triggers and increments counter++ 
+    //3.If the verify retunrs false (no erros), it triggers and increments counter++ 
     const plus = () => {
         if (formVerified === true) {
             setCounter(prev => {

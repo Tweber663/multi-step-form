@@ -30,7 +30,7 @@
     justify-content: space-between;
     position: relative;
     border: 1px solid $Light-gray;
-    height: 140px;
+    max-height: 160px;
     width: 120px;
     border-radius: 9px;
     transition: 250ms ease border-color; 
@@ -52,14 +52,17 @@ input[name=arcade], input[name=advanced], input[name=pro] {
 }
 
 .arcadeChecked {
+    background-color: $Alabaster;
     border-color: $Purplish-blue
 }
 
 .advancedChecked {
+    background-color: $Alabaster;
     border-color: $Purplish-blue
 }
 
 .proChecked {
+    background-color: $Alabaster;
     border-color: $Purplish-blue
 }
 
@@ -69,12 +72,42 @@ input[name=arcade], input[name=advanced], input[name=pro] {
     height: 35px;
 }
 
-.boxTitleWrapper h4 {
-    color: $marine-blue;
-    font-weight: 500;
+.boxTitleWrapper {
+    margin-top: 60px
 }
 
+.boxTitleWrapper h4{
+    color: $marine-blue;
+    font-weight: 500;
+    margin: 0;
+}
+
+
+.radioWrapper h4 {
+    color: $Light-gray;
+    font-weight: 500;
+    margin: 0;
+}
+
+.yearlyWrapper h5 {
+    margin: 3px 0 2px 0;
+    color: $Cool-gray;
+    font-weight: 500;
+    font-size: 13px;
+}
+
+.yearlyWrapper h6 {
+    font-size: 11px;
+    color: $marine-blue;
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+}
+
+
 .radioWrapper {
+    position: absolute;
+    width: 100%;
     margin-top: 30px;
     display: flex;
     justify-content: center;
@@ -82,20 +115,26 @@ input[name=arcade], input[name=advanced], input[name=pro] {
     height: 40px;
     border-radius: 9px;
     background-color: $Alabaster;
+    bottom: 160px;
 }
+
 
 .switch {
     position: relative;
     display: inline-block;
     width: 40px;
     height: 20px;
-    margin: 0;
+    margin: 0 20px;
   }
 
 .switch input { 
     opacity: 0;
     width: 0;
     height: 0;
+}
+
+h4.selected {
+    color: $marine-blue;
 }
 
 .slider {
@@ -138,7 +177,6 @@ input[name=switch]:checked + .slider:before {
 .slider.round:before {
     border-radius: 50%;
 }
-
 
 
 

@@ -6,6 +6,7 @@ import counterSlice from "./features/counterSlice";
 import formVerifySlice from "./features/formVerifySlice";
 import monthlyYearlySlicer from "./features/monthlyYearlySlicer";
 import totalPriceSlicer from "./features/totalPriceSlicer";
+import addOnsSlicer from "./features/addOnsSlicer";
 
 export const store = configureStore({
     reducer: { 
@@ -14,6 +15,8 @@ export const store = configureStore({
         verifyRedcuer: formVerifySlice,
         monthlyYearly: monthlyYearlySlicer,
         totalCost: totalPriceSlicer, 
+        AddOns: addOnsSlicer, 
+    
     }
 })
 
