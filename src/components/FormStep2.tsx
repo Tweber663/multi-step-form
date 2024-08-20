@@ -75,6 +75,7 @@ const FormStep2 = forwardRef<Checking, propsCheck>(({returnFunc, pageOn}, ref) =
             returnFunc(false, 2)
         } else {
             returnFunc(true, 2)
+            dispatch(checkingSteps({step2: true}))
         }
     }
 

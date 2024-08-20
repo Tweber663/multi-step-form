@@ -39,6 +39,7 @@ const FormStep3 = forwardRef<RefCheck, PropsCheck>(({pageOn, returnFunc}, ref) =
     }, [addOnOne, addOnTwo, addOnThree, currentState.monthlyYearly])
 
 
+    
     return (
         <div className={clsx(styles.formStep3, pageOn && styles.show)}>
         <h1>Pick add-ons</h1>

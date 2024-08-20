@@ -1,10 +1,11 @@
 import styles from './ButtonSections.module.scss'
-import { FC, useEffect } from 'react';
+import { FormEvent, useEffect } from 'react';
 import { counting } from '../store/features/counterSlice';
 import { useAppSelector, useAppDispatch } from '../store/store';
 import { useState } from 'react';
 import { forwardRef } from 'react';
 import { useImperativeHandle } from 'react';
+import clsx from 'clsx';
 
 type Checking = {
     parentTrigger: (e: boolean, b: number) => void; 
@@ -12,7 +13,8 @@ type Checking = {
 }
 
 export interface refChecking {
-    returnVeirfyRequest: (e: boolean, formNumber: number) => void
+    returnVeirfyRequest: (e: boolean, formNumber: number) => void;
+    changeCounter?: () => void; 
 }
 
 const ButtonSection = forwardRef<refChecking, Checking>(({parentTrigger}, ref) => {
@@ -22,9 +24,7 @@ const ButtonSection = forwardRef<refChecking, Checking>(({parentTrigger}, ref) =
     const [counter, setCounter] = useState<number>(1)
     useEffect(() => {
         dispatch(counting(counter))
-    }, [counter, currentState])
-
-
+    }, [counter])
 
     //1.Requesting Form verification based on current step counter
     const triggerHandler = () => {
@@ -32,14 +32,16 @@ const ButtonSection = forwardRef<refChecking, Checking>(({parentTrigger}, ref) =
             console.log('request have been sentto from 1')
             parentTrigger(true, counter); 
         }
-
         if (counter === 2) {
             console.log('request have been sentto from 2')
             parentTrigger(true, counter); 
         }
-
         if (counter === 3) {
             console.log('request have been sentto from 3')
+            parentTrigger(true, counter); 
+        }
+        if (counter === 4) {
+            console.log('request have been sentto from 4')
             parentTrigger(true, counter); 
         }
     }
@@ -73,10 +75,12 @@ const ButtonSection = forwardRef<refChecking, Checking>(({parentTrigger}, ref) =
         });
     }
 
+    const changeCounter = () => setCounter(2);
 
     // responsbile for travelling 
     useImperativeHandle(ref, () => ({
-        returnVeirfyRequest
+        changeCounter,
+        returnVeirfyRequest, 
     }));
 
 
@@ -86,7 +90,7 @@ const ButtonSection = forwardRef<refChecking, Checking>(({parentTrigger}, ref) =
                 onClick={minus}
                 value="back"
                 type="button" 
-                className={styles.btnBack}> 
+                className={clsx(styles.btnBack, counter === 1 && styles.hide)}> 
                 Go Back
             </button>
             <button 
@@ -96,8 +100,15 @@ const ButtonSection = forwardRef<refChecking, Checking>(({parentTrigger}, ref) =
                 }}
                 value="next"
                 type="button" 
-                className={styles.btnNext}> 
-                Next Step 
+                className={clsx(styles.btnNext, counter === 4 && styles.hide)}> 
+                Next Step
+            </button>
+            <button 
+                onClick={() => triggerHandler()}
+                value="next"
+                type="submit" 
+                className={clsx(styles.btnConfirm, counter === 4 && styles.confirm)}> 
+                Confirm
             </button>
         </div>
     )

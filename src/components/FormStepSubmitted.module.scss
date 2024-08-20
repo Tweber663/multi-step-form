@@ -1,0 +1,18 @@
+@import '../styles/_variables.scss';
+.formStepSubmitted {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+}
+
+.formStepSubmitted img {
+    width: 50px;
+}
+
+
+.formStepSubmitted h1 {
+    color: $marine-blue;
+    margin-top: 15px
+}

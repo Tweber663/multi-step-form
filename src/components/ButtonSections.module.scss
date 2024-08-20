@@ -23,6 +23,10 @@
     transition: background-color 200ms ease;
 }
 
+.btnNext.hide {
+    display: none;
+}
+
 .btnNext:hover {
     background-color: $Purplish-blue;
 }
@@ -35,5 +39,28 @@
 }
 
 .btnBack:hover {
+    cursor: pointer;
+}
+
+.btnBack.hide {
+    opacity: 0;
+}
+
+.btnBack:hover {
     color: $marine-blue;
+}
+.btnConfirm {
+    display: none;
+}
+
+.btnConfirm.confirm {
+    display: block;
+    background-color: $Purplish-blue;
+    color: white;
+    transition: 150ms background-color ease; 
+    cursor: pointer;
+}
+
+.btnConfirm.confirm:hover {
+    background-color: $marine-blue;
 }
